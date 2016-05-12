@@ -20144,6 +20144,10 @@
 
 	var _menu2 = _interopRequireDefault(_menu);
 
+	var _noticia = __webpack_require__(438);
+
+	var _noticia2 = _interopRequireDefault(_noticia);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -20176,13 +20180,8 @@
 	            { className: 'show-grid' },
 	            _react2.default.createElement(
 	              _reactBootstrap.Col,
-	              { xs: 12, md: 8 },
-	              'Pedro'
-	            ),
-	            _react2.default.createElement(
-	              _reactBootstrap.Col,
-	              { xs: 6, md: 4 },
-	              'Victor'
+	              { xs: 12, md: 12 },
+	              _react2.default.createElement(_noticia2.default, null)
 	            )
 	          )
 	        )
@@ -39404,6 +39403,10 @@
 
 	var _menu2 = _interopRequireDefault(_menu);
 
+	var _style = __webpack_require__(437);
+
+	var _style2 = _interopRequireDefault(_style);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _menu2.default;
@@ -39447,33 +39450,37 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        _reactBootstrap.Navbar,
-	        { fluid: true, fixedTop: true },
+	        'div',
+	        { id: 'menu' },
 	        _react2.default.createElement(
-	          _reactBootstrap.Navbar.Header,
-	          null,
+	          _reactBootstrap.Navbar,
+	          { fluid: true, fixedTop: true },
 	          _react2.default.createElement(
-	            _reactBootstrap.Navbar.Brand,
+	            _reactBootstrap.Navbar.Header,
 	            null,
 	            _react2.default.createElement(
-	              'a',
-	              { href: '#' },
-	              'React-News'
+	              _reactBootstrap.Navbar.Brand,
+	              null,
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'React-News'
+	              )
 	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          _reactBootstrap.Nav,
-	          null,
-	          _react2.default.createElement(
-	            _reactBootstrap.NavItem,
-	            { eventKey: 1, href: '#' },
-	            'Link'
 	          ),
 	          _react2.default.createElement(
-	            _reactBootstrap.NavItem,
-	            { eventKey: 2, href: '#' },
-	            'Link'
+	            _reactBootstrap.Nav,
+	            null,
+	            _react2.default.createElement(
+	              _reactBootstrap.NavItem,
+	              { eventKey: 1, href: '#' },
+	              'Link'
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.NavItem,
+	              { eventKey: 2, href: '#' },
+	              'Link'
+	            )
 	          )
 	        )
 	      );
@@ -39484,6 +39491,114 @@
 	}(_react.Component);
 
 	exports.default = Menu;
+
+/***/ },
+/* 437 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 438 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _noticia = __webpack_require__(439);
+
+	var _noticia2 = _interopRequireDefault(_noticia);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _noticia2.default;
+
+/***/ },
+/* 439 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactBootstrap = __webpack_require__(170);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Noticia = function (_Component) {
+	  _inherits(Noticia, _Component);
+
+	  function Noticia() {
+	    _classCallCheck(this, Noticia);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Noticia).apply(this, arguments));
+	  }
+
+	  _createClass(Noticia, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _reactBootstrap.Media,
+	        null,
+	        _react2.default.createElement(
+	          _reactBootstrap.Media.Left,
+	          null,
+	          _react2.default.createElement('img', { width: 120, height: 120, src: this.props.img, alt: 'Image' })
+	        ),
+	        _react2.default.createElement(
+	          _reactBootstrap.Media.Body,
+	          null,
+	          _react2.default.createElement(
+	            _reactBootstrap.Media.Heading,
+	            null,
+	            this.props.titulo
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            this.props.texto
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Button,
+	            null,
+	            'Leer más'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Noticia;
+	}(_react.Component);
+
+	Noticia.PropTypes = {
+	  titulo: _react2.default.PropTypes.string,
+	  texto: _react2.default.PropTypes.string,
+	  img: _react2.default.PropTypes.string
+	};
+	Noticia.defaultProps = {
+	  titulo: 'Titulazo',
+	  texto: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed eiusmod tempor',
+	  img: 'https://lh3.googleusercontent.com/-0_Qt3elTTl0/AAAAAAAAAAI/AAAAAAAAAAA/ADhl2ypvSZrMm4D9LMBEru6J-jcziCbTqA/s32-c-mo/photo.jpg'
+	};
+	exports.default = Noticia;
 
 /***/ }
 /******/ ]);

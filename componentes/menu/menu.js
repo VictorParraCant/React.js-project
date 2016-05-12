@@ -5,17 +5,19 @@ class Menu extends Component {
 
   render(){
     return(
-      <Navbar fluid={true} fixedTop={true} >
-        <Navbar.Header>
-          <Navbar.Brand>
-            <a href="#">React-News</a>
-          </Navbar.Brand>
-        </Navbar.Header>
-        <Nav>
-          <NavItem eventKey={1} href="#">Link</NavItem>
-          <NavItem eventKey={2} href="#">Link</NavItem>
-        </Nav>
-      </Navbar>
+      <div id="menu">
+        <Navbar fluid={true} fixedTop={true} >
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="#">React-News</a>
+            </Navbar.Brand>
+          </Navbar.Header>
+          <Nav>
+            <NavItem eventKey={1} href="#">Link</NavItem>
+            <NavItem eventKey={2} href="#">Link</NavItem>
+          </Nav>
+        </Navbar>
+      </div>
     )
   }
 }

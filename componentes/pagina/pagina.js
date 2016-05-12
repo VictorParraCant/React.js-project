@@ -1,6 +1,7 @@
 import React, { Component, PropTypes as PT } from 'react'
 import {Grid, Row, Col, Clearfix} from 'react-bootstrap'
 import Menu from "../menu"
+import Noticia from "../noticia"
 
 class Pagina extends Component {
   render(){
@@ -9,8 +10,9 @@ class Pagina extends Component {
         <Menu></Menu>
         <Grid>
           <Row className="show-grid">
-            <Col xs={12} md={8}>Pedro</Col>
-            <Col xs={6} md={4}>Victor</Col>
+            <Col xs={12} md={12}>
+              <Noticia></Noticia>
+            </Col>
           </Row>
         </Grid>
       </div>
