@@ -13,8 +13,7 @@ class Menu extends Component {
             </Navbar.Brand>
           </Navbar.Header>
           <Nav>
-            <NavItem eventKey={1} href="#">Link</NavItem>
-            <NavItem eventKey={2} href="#">Link</NavItem>
+            <NavItem eventKey={1} href="#">About</NavItem>
           </Nav>
         </Navbar>
       </div>
