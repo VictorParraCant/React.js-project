@@ -1,29 +1,39 @@
 import React, { Component, PropTypes as PT } from 'react'
-import { Media, Button } from 'react-bootstrap'
+import {Col, Clearfix, Thumbnail, Button} from 'react-bootstrap'
+
 
 const Noticia = props => (
-    <Media>
-        <Media.Left>
-          <img width={120} height={120} src={props.img} alt="Image"/>
-        </Media.Left>
-        <Media.Body>
-          <Media.Heading>{props.titulo}</Media.Heading>
-          <p>{props.texto}</p>
-          <Button href={props.link}>Leer más</Button>
-        </Media.Body>
-    </Media>
+    //<Media className="noticia">
+    //    <Media.Left>
+    //    { props.img ? <img width={120} height={120} src={props.img} alt="Image"/> :
+    //      <img width={120} height={120} src='https://facebook.github.io/react/img/logo.svg' alt="Image"/>
+    //    }
+    //    </Media.Left>
+    //    <Media.Body>
+    //      <Media.Heading>{props.titulo}</Media.Heading>
+    //      {props.texto ? <p>{props.texto}</p> :
+    //        <p>Lo sentimos, en estos momentos no existe descripcion de la noticia.</p>}
+    //      <Button href={props.link}>Leer más</Button>
+    //    </Media.Body>
+    //</Media>
+    <Col xs={12} sm={4} md={3}>
+      <Thumbnail src={props.img} alt="Image">
+          <h3>{props.titulo}</h3>
+          {props.texto ? <p>{props.texto}</p> :
+            <p>Lo sentimos, en estos momentos no existe descripcion de la noticia.</p>}
+          <p>
+            <Button href={props.link}>Leer más</Button>
+          </p>
+      </Thumbnail>
+    </Col>
+
 )
 
 Noticia.PropTypes = {
   titulo: PT.string.isRequired,
-  texto:  PT.string,
-  img:    PT.string,
+  img:    PT.string.isRequired,
+  texto:  PT.string.isRequired,
   link:   PT.string.isRequired
 };
-
-Noticia.defaultProps = {
-    texto:  'No existe descripcion en estos momentos...',
-    img:    'https://facebook.github.io/react/img/logo.svg'
-}
 
 export default Noticia

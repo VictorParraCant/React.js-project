@@ -26,16 +26,21 @@ class Pagina extends Component {
   }
 
   parser(miDato) {
-    //console.log(miDato.data);
+    console.log(miDato.data);
     let linkin = "https://www.reddit.com"
     let nuevosDatos = []
+    let logo = "https://facebook.github.io/react/img/logo.svg"
     miDato.data.data.children.map( x => {
+      let text = (x.data.selftext === "") ? null : x.data.selftext
+      let img = ( x.data.thumbnail === "self") ? logo : x.data.thumbnail
+      let link = linkin+x.data.permalink
+      //let img = ( x.data.thumbnail !== '(.*?)\.(jpg)$' ) ? null : x.data.thumbnail
       nuevosDatos.push(
         {
           "titulo": x.data.title,
-          "texto": x.data.selftext,
-          "img": x.data.thumbnail,
-          "link": linkin+x.data.permalink
+          "texto": text,
+          "img": img,
+          "link": link
         }
       )
     })
@@ -52,9 +57,7 @@ class Pagina extends Component {
         <Menu></Menu>
         <Grid>
           <Row className="show-grid">
-            <Col xs={12} md={12}>
               {noticias}
-            </Col>
           </Row>
         </Grid>
       </div>

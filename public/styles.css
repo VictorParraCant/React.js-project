@@ -1,3 +1,11 @@
 #menu {
   margin-bottom: 70px;
 }
+.thumbnail img {
+  width: 100%;
+  height: auto;
+}
+.thumbnail p {
+  overflow: hidden;
+  max-height: 120px;
+}

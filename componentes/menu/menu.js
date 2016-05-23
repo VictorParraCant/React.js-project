@@ -12,9 +12,6 @@ class Menu extends Component {
               <a href="#">React-News</a>
             </Navbar.Brand>
           </Navbar.Header>
-          <Nav>
-            <NavItem eventKey={1} href="#">About</NavItem>
-          </Nav>
         </Navbar>
       </div>
     )

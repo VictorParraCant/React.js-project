@@ -20150,7 +20150,7 @@
 
 	var _noticia2 = _interopRequireDefault(_noticia);
 
-	var _axios = __webpack_require__(440);
+	var _axios = __webpack_require__(441);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
@@ -20188,15 +20188,20 @@
 	  }, {
 	    key: 'parser',
 	    value: function parser(miDato) {
-	      //console.log(miDato.data);
+	      console.log(miDato.data);
 	      var linkin = "https://www.reddit.com";
 	      var nuevosDatos = [];
+	      var logo = "https://facebook.github.io/react/img/logo.svg";
 	      miDato.data.data.children.map(function (x) {
+	        var text = x.data.selftext === "" ? null : x.data.selftext;
+	        var img = x.data.thumbnail === "self" ? logo : x.data.thumbnail;
+	        var link = linkin + x.data.permalink;
+	        //let img = ( x.data.thumbnail !== '(.*?)\.(jpg)$' ) ? null : x.data.thumbnail
 	        nuevosDatos.push({
 	          "titulo": x.data.title,
-	          "texto": x.data.selftext,
-	          "img": x.data.thumbnail,
-	          "link": linkin + x.data.permalink
+	          "texto": text,
+	          "img": img,
+	          "link": link
 	        });
 	      });
 	      this.setState({ datos: nuevosDatos });
@@ -20222,11 +20227,7 @@
 	          _react2.default.createElement(
 	            _reactBootstrap.Row,
 	            { className: 'show-grid' },
-	            _react2.default.createElement(
-	              _reactBootstrap.Col,
-	              { xs: 12, md: 12 },
-	              noticias
-	            )
+	            noticias
 	          )
 	        )
 	      );
@@ -39517,15 +39518,6 @@
 	                'React-News'
 	              )
 	            )
-	          ),
-	          _react2.default.createElement(
-	            _reactBootstrap.Nav,
-	            null,
-	            _react2.default.createElement(
-	              _reactBootstrap.NavItem,
-	              { eventKey: 1, href: '#' },
-	              'About'
-	            )
 	          )
 	        )
 	      );
@@ -39557,6 +39549,10 @@
 
 	var _noticia2 = _interopRequireDefault(_noticia);
 
+	var _style = __webpack_require__(440);
+
+	var _style2 = _interopRequireDefault(_style);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _noticia2.default;
@@ -39580,31 +39576,49 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Noticia = function Noticia(props) {
-	  return _react2.default.createElement(
-	    _reactBootstrap.Media,
-	    null,
+	  return(
+	    //<Media className="noticia">
+	    //    <Media.Left>
+	    //    { props.img ? <img width={120} height={120} src={props.img} alt="Image"/> :
+	    //      <img width={120} height={120} src='https://facebook.github.io/react/img/logo.svg' alt="Image"/>
+	    //    }
+	    //    </Media.Left>
+	    //    <Media.Body>
+	    //      <Media.Heading>{props.titulo}</Media.Heading>
+	    //      {props.texto ? <p>{props.texto}</p> :
+	    //        <p>Lo sentimos, en estos momentos no existe descripcion de la noticia.</p>}
+	    //      <Button href={props.link}>Leer más</Button>
+	    //    </Media.Body>
+	    //</Media>
 	    _react2.default.createElement(
-	      _reactBootstrap.Media.Left,
-	      null,
-	      _react2.default.createElement('img', { width: 120, height: 120, src: props.img, alt: 'Image' })
-	    ),
-	    _react2.default.createElement(
-	      _reactBootstrap.Media.Body,
-	      null,
+	      _reactBootstrap.Col,
+	      { xs: 12, sm: 4, md: 3 },
 	      _react2.default.createElement(
-	        _reactBootstrap.Media.Heading,
-	        null,
-	        props.titulo
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        props.texto
-	      ),
-	      _react2.default.createElement(
-	        _reactBootstrap.Button,
-	        { href: props.link },
-	        'Leer más'
+	        _reactBootstrap.Thumbnail,
+	        { src: props.img, alt: 'Image' },
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          props.titulo
+	        ),
+	        props.texto ? _react2.default.createElement(
+	          'p',
+	          null,
+	          props.texto
+	        ) : _react2.default.createElement(
+	          'p',
+	          null,
+	          'Lo sentimos, en estos momentos no existe descripcion de la noticia.'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          _react2.default.createElement(
+	            _reactBootstrap.Button,
+	            { href: props.link },
+	            'Leer más'
+	          )
+	        )
 	      )
 	    )
 	  );
@@ -39612,38 +39626,39 @@
 
 	Noticia.PropTypes = {
 	  titulo: _react.PropTypes.string.isRequired,
-	  texto: _react.PropTypes.string,
-	  img: _react.PropTypes.string,
+	  img: _react.PropTypes.string.isRequired,
+	  texto: _react.PropTypes.string.isRequired,
 	  link: _react.PropTypes.string.isRequired
-	};
-
-	Noticia.defaultProps = {
-	  texto: 'No existe descripcion en estos momentos...',
-	  img: 'https://facebook.github.io/react/img/logo.svg'
 	};
 
 	exports.default = Noticia;
 
 /***/ },
 /* 440 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	module.exports = __webpack_require__(441);
+	// removed by extract-text-webpack-plugin
 
 /***/ },
 /* 441 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = __webpack_require__(442);
+
+/***/ },
+/* 442 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
-	var defaults = __webpack_require__(442);
-	var utils = __webpack_require__(443);
-	var dispatchRequest = __webpack_require__(444);
-	var InterceptorManager = __webpack_require__(453);
-	var isAbsoluteURL = __webpack_require__(454);
-	var combineURLs = __webpack_require__(455);
-	var bind = __webpack_require__(456);
-	var transformData = __webpack_require__(448);
+	var defaults = __webpack_require__(443);
+	var utils = __webpack_require__(444);
+	var dispatchRequest = __webpack_require__(445);
+	var InterceptorManager = __webpack_require__(454);
+	var isAbsoluteURL = __webpack_require__(455);
+	var combineURLs = __webpack_require__(456);
+	var bind = __webpack_require__(457);
+	var transformData = __webpack_require__(449);
 
 	function Axios(defaultConfig) {
 	  this.defaults = utils.merge({}, defaultConfig);
@@ -39728,7 +39743,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(457);
+	axios.spread = __webpack_require__(458);
 
 	// Provide aliases for supported request methods
 	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
@@ -39756,12 +39771,12 @@
 
 
 /***/ },
-/* 442 */
+/* 443 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(443);
+	var utils = __webpack_require__(444);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -39828,7 +39843,7 @@
 
 
 /***/ },
-/* 443 */
+/* 444 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40100,7 +40115,7 @@
 
 
 /***/ },
-/* 444 */
+/* 445 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -40122,10 +40137,10 @@
 	        adapter = config.adapter;
 	      } else if (typeof XMLHttpRequest !== 'undefined') {
 	        // For browsers use XHR adapter
-	        adapter = __webpack_require__(445);
+	        adapter = __webpack_require__(446);
 	      } else if (typeof process !== 'undefined') {
 	        // For node use HTTP adapter
-	        adapter = __webpack_require__(445);
+	        adapter = __webpack_require__(446);
 	      }
 
 	      if (typeof adapter === 'function') {
@@ -40141,18 +40156,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 445 */
+/* 446 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(443);
-	var buildURL = __webpack_require__(446);
-	var parseHeaders = __webpack_require__(447);
-	var transformData = __webpack_require__(448);
-	var isURLSameOrigin = __webpack_require__(449);
-	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(450);
-	var settle = __webpack_require__(451);
+	var utils = __webpack_require__(444);
+	var buildURL = __webpack_require__(447);
+	var parseHeaders = __webpack_require__(448);
+	var transformData = __webpack_require__(449);
+	var isURLSameOrigin = __webpack_require__(450);
+	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(451);
+	var settle = __webpack_require__(452);
 
 	module.exports = function xhrAdapter(resolve, reject, config) {
 	  var requestData = config.data;
@@ -40251,7 +40266,7 @@
 	  // This is only done if running in a standard browser environment.
 	  // Specifically not if we're in a web worker, or react-native.
 	  if (utils.isStandardBrowserEnv()) {
-	    var cookies = __webpack_require__(452);
+	    var cookies = __webpack_require__(453);
 
 	    // Add xsrf header
 	    var xsrfValue = config.withCredentials || isURLSameOrigin(config.url) ?
@@ -40312,12 +40327,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 446 */
+/* 447 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(443);
+	var utils = __webpack_require__(444);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -40385,12 +40400,12 @@
 
 
 /***/ },
-/* 447 */
+/* 448 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(443);
+	var utils = __webpack_require__(444);
 
 	/**
 	 * Parse headers into an object
@@ -40428,12 +40443,12 @@
 
 
 /***/ },
-/* 448 */
+/* 449 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(443);
+	var utils = __webpack_require__(444);
 
 	/**
 	 * Transform the data for a request or a response
@@ -40454,12 +40469,12 @@
 
 
 /***/ },
-/* 449 */
+/* 450 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(443);
+	var utils = __webpack_require__(444);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -40528,7 +40543,7 @@
 
 
 /***/ },
-/* 450 */
+/* 451 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40570,7 +40585,7 @@
 
 
 /***/ },
-/* 451 */
+/* 452 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40594,12 +40609,12 @@
 
 
 /***/ },
-/* 452 */
+/* 453 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(443);
+	var utils = __webpack_require__(444);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -40653,12 +40668,12 @@
 
 
 /***/ },
-/* 453 */
+/* 454 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(443);
+	var utils = __webpack_require__(444);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -40711,7 +40726,7 @@
 
 
 /***/ },
-/* 454 */
+/* 455 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40731,7 +40746,7 @@
 
 
 /***/ },
-/* 455 */
+/* 456 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40749,7 +40764,7 @@
 
 
 /***/ },
-/* 456 */
+/* 457 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40766,7 +40781,7 @@
 
 
 /***/ },
-/* 457 */
+/* 458 */
 /***/ function(module, exports) {
 
 	'use strict';
