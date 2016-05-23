@@ -20120,6 +20120,10 @@
 
 	var _pagina2 = _interopRequireDefault(_pagina);
 
+	var _style = __webpack_require__(459);
+
+	var _style2 = _interopRequireDefault(_style);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _pagina2.default;
@@ -20189,19 +20193,17 @@
 	    key: 'parser',
 	    value: function parser(miDato) {
 	      console.log(miDato.data);
-	      var linkin = "https://www.reddit.com";
 	      var nuevosDatos = [];
 	      var logo = "https://facebook.github.io/react/img/logo.svg";
+	      var regex = new RegExp('(.*?)\.(jpg)$');
 	      miDato.data.data.children.map(function (x) {
 	        var text = x.data.selftext === "" ? null : x.data.selftext;
-	        var img = x.data.thumbnail === "self" ? logo : x.data.thumbnail;
-	        var link = linkin + x.data.permalink;
-	        //let img = ( x.data.thumbnail !== '(.*?)\.(jpg)$' ) ? null : x.data.thumbnail
+	        var img = regex.test(x.data.thumbnail) ? x.data.thumbnail : logo;
 	        nuevosDatos.push({
 	          "titulo": x.data.title,
 	          "texto": text,
 	          "img": img,
-	          "link": link
+	          "link": x.data.url
 	        });
 	      });
 	      this.setState({ datos: nuevosDatos });
@@ -20213,8 +20215,8 @@
 	        'p',
 	        null,
 	        'Cargando... '
-	      ) : this.state.datos.map(function (noticia) {
-	        return _react2.default.createElement(_noticia2.default, { titulo: noticia.titulo, texto: noticia.texto, img: noticia.img, link: noticia.link });
+	      ) : this.state.datos.map(function (noticia, idx) {
+	        return _react2.default.createElement(_noticia2.default, { key: idx, titulo: noticia.titulo, texto: noticia.texto, img: noticia.img, link: noticia.link });
 	      });
 
 	      return _react2.default.createElement(
@@ -20226,7 +20228,7 @@
 	          null,
 	          _react2.default.createElement(
 	            _reactBootstrap.Row,
-	            { className: 'show-grid' },
+	            { id: 'Flex', className: 'show-grid' },
 	            noticias
 	          )
 	        )
@@ -39576,48 +39578,33 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Noticia = function Noticia(props) {
-	  return(
-	    //<Media className="noticia">
-	    //    <Media.Left>
-	    //    { props.img ? <img width={120} height={120} src={props.img} alt="Image"/> :
-	    //      <img width={120} height={120} src='https://facebook.github.io/react/img/logo.svg' alt="Image"/>
-	    //    }
-	    //    </Media.Left>
-	    //    <Media.Body>
-	    //      <Media.Heading>{props.titulo}</Media.Heading>
-	    //      {props.texto ? <p>{props.texto}</p> :
-	    //        <p>Lo sentimos, en estos momentos no existe descripcion de la noticia.</p>}
-	    //      <Button href={props.link}>Leer más</Button>
-	    //    </Media.Body>
-	    //</Media>
+	  return _react2.default.createElement(
+	    _reactBootstrap.Col,
+	    { xs: 12, sm: 4, md: 3 },
 	    _react2.default.createElement(
-	      _reactBootstrap.Col,
-	      { xs: 12, sm: 4, md: 3 },
+	      _reactBootstrap.Thumbnail,
+	      { src: props.img, alt: 'Image' },
 	      _react2.default.createElement(
-	        _reactBootstrap.Thumbnail,
-	        { src: props.img, alt: 'Image' },
+	        'h3',
+	        null,
+	        props.titulo
+	      ),
+	      props.texto ? _react2.default.createElement(
+	        'p',
+	        null,
+	        props.texto
+	      ) : _react2.default.createElement(
+	        'p',
+	        null,
+	        'Lo sentimos, en estos momentos no existe descripcion de la noticia.'
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
 	        _react2.default.createElement(
-	          'h3',
-	          null,
-	          props.titulo
-	        ),
-	        props.texto ? _react2.default.createElement(
-	          'p',
-	          null,
-	          props.texto
-	        ) : _react2.default.createElement(
-	          'p',
-	          null,
-	          'Lo sentimos, en estos momentos no existe descripcion de la noticia.'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          _react2.default.createElement(
-	            _reactBootstrap.Button,
-	            { href: props.link },
-	            'Leer más'
-	          )
+	          _reactBootstrap.Button,
+	          { href: props.link },
+	          'Leer más'
 	        )
 	      )
 	    )
@@ -40812,6 +40799,12 @@
 	  };
 	};
 
+
+/***/ },
+/* 459 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ]);

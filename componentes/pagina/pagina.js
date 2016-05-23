@@ -27,20 +27,18 @@ class Pagina extends Component {
 
   parser(miDato) {
     console.log(miDato.data);
-    let linkin = "https://www.reddit.com"
     let nuevosDatos = []
     let logo = "https://facebook.github.io/react/img/logo.svg"
+    var regex = new RegExp('(.*?)\.(jpg)$');
     miDato.data.data.children.map( x => {
       let text = (x.data.selftext === "") ? null : x.data.selftext
-      let img = ( x.data.thumbnail === "self") ? logo : x.data.thumbnail
-      let link = linkin+x.data.permalink
-      //let img = ( x.data.thumbnail !== '(.*?)\.(jpg)$' ) ? null : x.data.thumbnail
+      let img = regex.test(x.data.thumbnail) ? x.data.thumbnail : logo
       nuevosDatos.push(
         {
           "titulo": x.data.title,
           "texto": text,
           "img": img,
-          "link": link
+          "link": x.data.url
         }
       )
     })
@@ -49,14 +47,14 @@ class Pagina extends Component {
 
   render(){
     let noticias = ( this.state.datos.length === 0 ) ? <p>Cargando... </p> :
-    this.state.datos.map( noticia =>
-      <Noticia titulo={noticia.titulo} texto={noticia.texto} img={noticia.img} link={noticia.link}/> )
+    this.state.datos.map( (noticia,idx) =>
+      <Noticia key={idx} titulo={noticia.titulo} texto={noticia.texto} img={noticia.img} link={noticia.link}/> )
 
     return(
       <div>
         <Menu></Menu>
         <Grid>
-          <Row className="show-grid">
+          <Row id="Flex" className="show-grid">
               {noticias}
           </Row>
         </Grid>
