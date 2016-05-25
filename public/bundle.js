@@ -20228,8 +20228,12 @@
 	          null,
 	          _react2.default.createElement(
 	            _reactBootstrap.Row,
-	            { id: 'Flex', className: 'show-grid' },
-	            noticias
+	            { className: 'show-grid' },
+	            _react2.default.createElement(
+	              'div',
+	              { id: 'Flex' },
+	              noticias
+	            )
 	          )
 	        )
 	      );
@@ -39515,8 +39519,8 @@
 	              _reactBootstrap.Navbar.Brand,
 	              null,
 	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
+	                'p',
+	                null,
 	                'React-News'
 	              )
 	            )

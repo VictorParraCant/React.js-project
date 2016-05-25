@@ -9,3 +9,6 @@
   overflow: hidden;
   max-height: 120px;
 }
+.thumbnail .btn {
+  margin-top: 20px;
+}

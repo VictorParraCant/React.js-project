@@ -9,7 +9,7 @@ class Menu extends Component {
         <Navbar fluid={true} fixedTop={true} >
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="#">React-News</a>
+              <p>React-News</p>
             </Navbar.Brand>
           </Navbar.Header>
         </Navbar>

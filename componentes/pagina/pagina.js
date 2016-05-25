@@ -54,8 +54,10 @@ class Pagina extends Component {
       <div>
         <Menu></Menu>
         <Grid>
-          <Row id="Flex" className="show-grid">
+          <Row className="show-grid">
+            <div id="Flex">
               {noticias}
+            </div>
           </Row>
         </Grid>
       </div>
