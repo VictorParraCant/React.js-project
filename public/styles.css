@@ -11,3 +11,15 @@
 .thumbnail .caption h3 {
   font-size: 20px;
 }
+.thumbnail .comment {
+  font-size: 12px;
+  text-align: left;
+  color: #333;
+  font-weight: bold;
+}
+.thumbnail .autor {
+  font-size: 12px;
+  text-align: left;
+  color: #02869e;
+  font-weight: bold;
+}

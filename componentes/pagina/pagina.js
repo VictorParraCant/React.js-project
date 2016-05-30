@@ -26,19 +26,23 @@ class Pagina extends Component {
   }
 
   parser(miDato) {
-    //console.log(miDato.data);
+    console.log(miDato.data);
     let nuevosDatos = []
     let logo = "https://facebook.github.io/react/img/logo.svg"
     var regex = new RegExp('(.*?)\.(jpg)$');
     miDato.data.data.children.map( x => {
+      let comment = "https://www.reddit.com"+x.data.permalink
       let text = (x.data.selftext === "") ? null : x.data.selftext
       let img = regex.test(x.data.thumbnail) ? x.data.thumbnail : logo
       nuevosDatos.push(
         {
+          "img": img,
           "titulo": x.data.title,
           "texto": text,
-          "img": img,
-          "link": x.data.url
+          "autor": x.data.author,
+          "comments": x.data.num_comments,
+          "link": x.data.url,
+          "comment": comment
         }
       )
     })
@@ -48,7 +52,15 @@ class Pagina extends Component {
   render(){
     let noticias = ( this.state.datos.length === 0 ) ? <p>Cargando... </p> :
     this.state.datos.map( (noticia,idx) =>
-      <Noticia key={idx} titulo={noticia.titulo} texto={noticia.texto} img={noticia.img} link={noticia.link}/> )
+      <Noticia key={idx}
+        img={noticia.img}
+        titulo={noticia.titulo}
+        texto={noticia.texto}
+        autor={noticia.autor}
+        comments={noticia.comments}
+        link={noticia.link}
+        comment={noticia.comment}/> )
+
     return(
       <div>
         <Menu></Menu>

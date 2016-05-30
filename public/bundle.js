@@ -20120,7 +20120,7 @@
 
 	var _pagina2 = _interopRequireDefault(_pagina);
 
-	var _style = __webpack_require__(459);
+	var _style = __webpack_require__(463);
 
 	var _style2 = _interopRequireDefault(_style);
 
@@ -20154,7 +20154,7 @@
 
 	var _noticia2 = _interopRequireDefault(_noticia);
 
-	var _axios = __webpack_require__(441);
+	var _axios = __webpack_require__(445);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
@@ -20192,18 +20192,22 @@
 	  }, {
 	    key: 'parser',
 	    value: function parser(miDato) {
-	      //console.log(miDato.data);
+	      console.log(miDato.data);
 	      var nuevosDatos = [];
 	      var logo = "https://facebook.github.io/react/img/logo.svg";
 	      var regex = new RegExp('(.*?)\.(jpg)$');
 	      miDato.data.data.children.map(function (x) {
+	        var comment = "https://www.reddit.com" + x.data.permalink;
 	        var text = x.data.selftext === "" ? null : x.data.selftext;
 	        var img = regex.test(x.data.thumbnail) ? x.data.thumbnail : logo;
 	        nuevosDatos.push({
+	          "img": img,
 	          "titulo": x.data.title,
 	          "texto": text,
-	          "img": img,
-	          "link": x.data.url
+	          "autor": x.data.author,
+	          "comments": x.data.num_comments,
+	          "link": x.data.url,
+	          "comment": comment
 	        });
 	      });
 	      this.setState({ datos: nuevosDatos });
@@ -20216,8 +20220,16 @@
 	        null,
 	        'Cargando... '
 	      ) : this.state.datos.map(function (noticia, idx) {
-	        return _react2.default.createElement(_noticia2.default, { key: idx, titulo: noticia.titulo, texto: noticia.texto, img: noticia.img, link: noticia.link });
+	        return _react2.default.createElement(_noticia2.default, { key: idx,
+	          img: noticia.img,
+	          titulo: noticia.titulo,
+	          texto: noticia.texto,
+	          autor: noticia.autor,
+	          comments: noticia.comments,
+	          link: noticia.link,
+	          comment: noticia.comment });
 	      });
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -39554,7 +39566,7 @@
 
 	var _noticia2 = _interopRequireDefault(_noticia);
 
-	var _style = __webpack_require__(440);
+	var _style = __webpack_require__(444);
 
 	var _style2 = _interopRequireDefault(_style);
 
@@ -39578,11 +39590,11 @@
 
 	var _reactBootstrap = __webpack_require__(170);
 
-	var _texto = __webpack_require__(460);
+	var _texto = __webpack_require__(440);
 
 	var _texto2 = _interopRequireDefault(_texto);
 
-	var _titulo = __webpack_require__(462);
+	var _titulo = __webpack_require__(442);
 
 	var _titulo2 = _interopRequireDefault(_titulo);
 
@@ -39600,12 +39612,25 @@
 	      _react2.default.createElement(_texto2.default, { descripcion: props.texto }),
 	      _react2.default.createElement(
 	        'p',
-	        null,
-	        _react2.default.createElement(
-	          _reactBootstrap.Button,
-	          { href: props.link, target: '_blank' },
-	          'Leer más'
-	        )
+	        { className: 'autor' },
+	        'Autor: ',
+	        props.autor
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        { className: 'comment' },
+	        'Comentarios: ',
+	        props.comments
+	      ),
+	      _react2.default.createElement(
+	        _reactBootstrap.Button,
+	        { bsStyle: 'info', href: props.link, target: '_blank' },
+	        'Leer más'
+	      ),
+	      _react2.default.createElement(
+	        _reactBootstrap.Button,
+	        { href: props.comment, target: '_blank' },
+	        'Ver comentarios'
 	      )
 	    )
 	  );
@@ -39614,6 +39639,7 @@
 	Noticia.PropTypes = {
 	  titulo: _react.PropTypes.string.isRequired,
 	  img: _react.PropTypes.string.isRequired,
+	  autor: _react.PropTypes.string.isRequired,
 	  texto: _react.PropTypes.string.isRequired,
 	  link: _react.PropTypes.string.isRequired
 	};
@@ -39622,15 +39648,87 @@
 
 /***/ },
 /* 440 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	// removed by extract-text-webpack-plugin
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _texto = __webpack_require__(441);
+
+	var _texto2 = _interopRequireDefault(_texto);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _texto2.default;
 
 /***/ },
 /* 441 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(442);
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Texto = function (_Component) {
+	  _inherits(Texto, _Component);
+
+	  function Texto(props) {
+	    _classCallCheck(this, Texto);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Texto).call(this, props));
+	  }
+
+	  _createClass(Texto, [{
+	    key: 'recortaTexto',
+	    value: function recortaTexto(descripcion) {
+	      if (descripcion === null) {
+	        return 'Lo sentimos, en estos momentos no existe descripcion de la noticia.';
+	      } else {
+	        return descripcion.length > this.props.maxlimit ? descripcion.substring(0, this.props.maxlimit - 3) + '...' : descripcion;
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'p',
+	        null,
+	        this.recortaTexto.call(this, this.props.descripcion)
+	      );
+	    }
+	  }]);
+
+	  return Texto;
+	}(_react.Component);
+
+	Texto.PropTypes = {
+	  descripcion: _react.PropTypes.string,
+	  maxlimit: _react.PropTypes.number
+	};
+	Texto.defaultProps = {
+	  descripcion: 'Lo sentimos, en estos momentos no existe descripcion de la noticia.',
+	  maxlimit: 170
+	};
+	exports.default = Texto;
 
 /***/ },
 /* 442 */
@@ -39638,14 +39736,110 @@
 
 	'use strict';
 
-	var defaults = __webpack_require__(443);
-	var utils = __webpack_require__(444);
-	var dispatchRequest = __webpack_require__(445);
-	var InterceptorManager = __webpack_require__(454);
-	var isAbsoluteURL = __webpack_require__(455);
-	var combineURLs = __webpack_require__(456);
-	var bind = __webpack_require__(457);
-	var transformData = __webpack_require__(449);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _titulo = __webpack_require__(443);
+
+	var _titulo2 = _interopRequireDefault(_titulo);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _titulo2.default;
+
+/***/ },
+/* 443 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Titulo = function (_Component) {
+	  _inherits(Titulo, _Component);
+
+	  function Titulo(props) {
+	    _classCallCheck(this, Titulo);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Titulo).call(this, props));
+	  }
+
+	  _createClass(Titulo, [{
+	    key: 'recortaTexto',
+	    value: function recortaTexto(tituloNoticia) {
+	      if (tituloNoticia === null) {
+	        return 'Cargando titulo...';
+	      } else {
+	        return tituloNoticia.length > this.props.maxlimit ? tituloNoticia.substring(0, this.props.maxlimit - 3) + '...' : tituloNoticia;
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'h3',
+	        null,
+	        this.recortaTexto.call(this, this.props.tituloNoticia)
+	      );
+	    }
+	  }]);
+
+	  return Titulo;
+	}(_react.Component);
+
+	Titulo.PropTypes = {
+	  tituloNoticia: _react.PropTypes.string,
+	  maxlimit: _react.PropTypes.number
+	};
+	Titulo.defaultProps = {
+	  tituloNoticia: 'Cargando titulo...',
+	  maxlimit: 60
+	};
+	exports.default = Titulo;
+
+/***/ },
+/* 444 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 445 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(446);
+
+/***/ },
+/* 446 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var defaults = __webpack_require__(447);
+	var utils = __webpack_require__(448);
+	var dispatchRequest = __webpack_require__(449);
+	var InterceptorManager = __webpack_require__(458);
+	var isAbsoluteURL = __webpack_require__(459);
+	var combineURLs = __webpack_require__(460);
+	var bind = __webpack_require__(461);
+	var transformData = __webpack_require__(453);
 
 	function Axios(defaultConfig) {
 	  this.defaults = utils.merge({}, defaultConfig);
@@ -39730,7 +39924,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(458);
+	axios.spread = __webpack_require__(462);
 
 	// Provide aliases for supported request methods
 	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
@@ -39758,12 +39952,12 @@
 
 
 /***/ },
-/* 443 */
+/* 447 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(444);
+	var utils = __webpack_require__(448);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -39830,7 +40024,7 @@
 
 
 /***/ },
-/* 444 */
+/* 448 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40102,7 +40296,7 @@
 
 
 /***/ },
-/* 445 */
+/* 449 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -40124,10 +40318,10 @@
 	        adapter = config.adapter;
 	      } else if (typeof XMLHttpRequest !== 'undefined') {
 	        // For browsers use XHR adapter
-	        adapter = __webpack_require__(446);
+	        adapter = __webpack_require__(450);
 	      } else if (typeof process !== 'undefined') {
 	        // For node use HTTP adapter
-	        adapter = __webpack_require__(446);
+	        adapter = __webpack_require__(450);
 	      }
 
 	      if (typeof adapter === 'function') {
@@ -40143,18 +40337,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 446 */
+/* 450 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(444);
-	var buildURL = __webpack_require__(447);
-	var parseHeaders = __webpack_require__(448);
-	var transformData = __webpack_require__(449);
-	var isURLSameOrigin = __webpack_require__(450);
-	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(451);
-	var settle = __webpack_require__(452);
+	var utils = __webpack_require__(448);
+	var buildURL = __webpack_require__(451);
+	var parseHeaders = __webpack_require__(452);
+	var transformData = __webpack_require__(453);
+	var isURLSameOrigin = __webpack_require__(454);
+	var btoa = (typeof window !== 'undefined' && window.btoa) || __webpack_require__(455);
+	var settle = __webpack_require__(456);
 
 	module.exports = function xhrAdapter(resolve, reject, config) {
 	  var requestData = config.data;
@@ -40253,7 +40447,7 @@
 	  // This is only done if running in a standard browser environment.
 	  // Specifically not if we're in a web worker, or react-native.
 	  if (utils.isStandardBrowserEnv()) {
-	    var cookies = __webpack_require__(453);
+	    var cookies = __webpack_require__(457);
 
 	    // Add xsrf header
 	    var xsrfValue = config.withCredentials || isURLSameOrigin(config.url) ?
@@ -40314,12 +40508,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 447 */
+/* 451 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(444);
+	var utils = __webpack_require__(448);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -40387,12 +40581,12 @@
 
 
 /***/ },
-/* 448 */
+/* 452 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(444);
+	var utils = __webpack_require__(448);
 
 	/**
 	 * Parse headers into an object
@@ -40430,12 +40624,12 @@
 
 
 /***/ },
-/* 449 */
+/* 453 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(444);
+	var utils = __webpack_require__(448);
 
 	/**
 	 * Transform the data for a request or a response
@@ -40456,12 +40650,12 @@
 
 
 /***/ },
-/* 450 */
+/* 454 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(444);
+	var utils = __webpack_require__(448);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -40530,7 +40724,7 @@
 
 
 /***/ },
-/* 451 */
+/* 455 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40572,7 +40766,7 @@
 
 
 /***/ },
-/* 452 */
+/* 456 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40596,12 +40790,12 @@
 
 
 /***/ },
-/* 453 */
+/* 457 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(444);
+	var utils = __webpack_require__(448);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -40655,12 +40849,12 @@
 
 
 /***/ },
-/* 454 */
+/* 458 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(444);
+	var utils = __webpack_require__(448);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -40713,7 +40907,7 @@
 
 
 /***/ },
-/* 455 */
+/* 459 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40733,7 +40927,7 @@
 
 
 /***/ },
-/* 456 */
+/* 460 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40751,7 +40945,7 @@
 
 
 /***/ },
-/* 457 */
+/* 461 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40768,7 +40962,7 @@
 
 
 /***/ },
-/* 458 */
+/* 462 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -40801,178 +40995,10 @@
 
 
 /***/ },
-/* 459 */
+/* 463 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 460 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _texto = __webpack_require__(461);
-
-	var _texto2 = _interopRequireDefault(_texto);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _texto2.default;
-
-/***/ },
-/* 461 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Texto = function (_Component) {
-	  _inherits(Texto, _Component);
-
-	  function Texto(props) {
-	    _classCallCheck(this, Texto);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Texto).call(this, props));
-	  }
-
-	  _createClass(Texto, [{
-	    key: 'recortaTexto',
-	    value: function recortaTexto(descripcion) {
-	      if (descripcion === null) {
-	        return 'Lo sentimos, en estos momentos no existe descripcion de la noticia.';
-	      } else {
-	        return descripcion.length > this.props.maxlimit ? descripcion.substring(0, this.props.maxlimit - 3) + '...' : descripcion;
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'p',
-	        null,
-	        this.recortaTexto.call(this, this.props.descripcion)
-	      );
-	    }
-	  }]);
-
-	  return Texto;
-	}(_react.Component);
-
-	Texto.PropTypes = {
-	  descripcion: _react.PropTypes.string,
-	  maxlimit: _react.PropTypes.number
-	};
-	Texto.defaultProps = {
-	  descripcion: 'Lo sentimos, en estos momentos no existe descripcion de la noticia.',
-	  maxlimit: 170
-	};
-	exports.default = Texto;
-
-/***/ },
-/* 462 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _titulo = __webpack_require__(463);
-
-	var _titulo2 = _interopRequireDefault(_titulo);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _titulo2.default;
-
-/***/ },
-/* 463 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Titulo = function (_Component) {
-	  _inherits(Titulo, _Component);
-
-	  function Titulo(props) {
-	    _classCallCheck(this, Titulo);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Titulo).call(this, props));
-	  }
-
-	  _createClass(Titulo, [{
-	    key: 'recortaTexto',
-	    value: function recortaTexto(tituloNoticia) {
-	      if (tituloNoticia === null) {
-	        return 'Cargando titulo...';
-	      } else {
-	        return tituloNoticia.length > this.props.maxlimit ? tituloNoticia.substring(0, this.props.maxlimit - 3) + '...' : tituloNoticia;
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'h3',
-	        null,
-	        this.recortaTexto.call(this, this.props.tituloNoticia)
-	      );
-	    }
-	  }]);
-
-	  return Titulo;
-	}(_react.Component);
-
-	Titulo.PropTypes = {
-	  tituloNoticia: _react.PropTypes.string,
-	  maxlimit: _react.PropTypes.number
-	};
-	Titulo.defaultProps = {
-	  tituloNoticia: 'Cargando titulo...',
-	  maxlimit: 60
-	};
-	exports.default = Titulo;
 
 /***/ }
 /******/ ]);

@@ -10,9 +10,10 @@ const Noticia = props => {
         <Thumbnail src={props.img} alt="Image">
             <Titulo tituloNoticia={props.titulo}></Titulo>
             <Texto descripcion={props.texto}></Texto>
-            <p>
-              <Button href={props.link} target="_blank">Leer más</Button>
-            </p>
+            <p className='autor'>Autor: {props.autor}</p>
+            <p className='comment'>Comentarios: {props.comments}</p>
+            <Button bsStyle="info" href={props.link} target="_blank">Leer más</Button>
+            <Button href={props.comment} target="_blank">Ver comentarios</Button>
         </Thumbnail>
       </Col>
 )}
@@ -20,6 +21,7 @@ const Noticia = props => {
 Noticia.PropTypes = {
   titulo: PT.string.isRequired,
   img:    PT.string.isRequired,
+  autor:  PT.string.isRequired,
   texto:  PT.string.isRequired,
   link:   PT.string.isRequired
 };
