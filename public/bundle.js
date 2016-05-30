@@ -20192,7 +20192,7 @@
 	  }, {
 	    key: 'parser',
 	    value: function parser(miDato) {
-	      console.log(miDato.data);
+	      //console.log(miDato.data);
 	      var nuevosDatos = [];
 	      var logo = "https://facebook.github.io/react/img/logo.svg";
 	      var regex = new RegExp('(.*?)\.(jpg)$');
@@ -20218,7 +20218,6 @@
 	      ) : this.state.datos.map(function (noticia, idx) {
 	        return _react2.default.createElement(_noticia2.default, { key: idx, titulo: noticia.titulo, texto: noticia.texto, img: noticia.img, link: noticia.link });
 	      });
-
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -39579,35 +39578,32 @@
 
 	var _reactBootstrap = __webpack_require__(170);
 
+	var _texto = __webpack_require__(460);
+
+	var _texto2 = _interopRequireDefault(_texto);
+
+	var _titulo = __webpack_require__(462);
+
+	var _titulo2 = _interopRequireDefault(_titulo);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Noticia = function Noticia(props) {
+
 	  return _react2.default.createElement(
 	    _reactBootstrap.Col,
 	    { xs: 12, sm: 4, md: 3 },
 	    _react2.default.createElement(
 	      _reactBootstrap.Thumbnail,
 	      { src: props.img, alt: 'Image' },
-	      _react2.default.createElement(
-	        'h3',
-	        null,
-	        props.titulo
-	      ),
-	      props.texto ? _react2.default.createElement(
-	        'p',
-	        null,
-	        props.texto
-	      ) : _react2.default.createElement(
-	        'p',
-	        null,
-	        'Lo sentimos, en estos momentos no existe descripcion de la noticia.'
-	      ),
+	      _react2.default.createElement(_titulo2.default, { tituloNoticia: props.titulo }),
+	      _react2.default.createElement(_texto2.default, { descripcion: props.texto }),
 	      _react2.default.createElement(
 	        'p',
 	        null,
 	        _react2.default.createElement(
 	          _reactBootstrap.Button,
-	          { href: props.link },
+	          { href: props.link, target: '_blank' },
 	          'Leer más'
 	        )
 	      )
@@ -40809,6 +40805,174 @@
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 460 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _texto = __webpack_require__(461);
+
+	var _texto2 = _interopRequireDefault(_texto);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _texto2.default;
+
+/***/ },
+/* 461 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Texto = function (_Component) {
+	  _inherits(Texto, _Component);
+
+	  function Texto(props) {
+	    _classCallCheck(this, Texto);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Texto).call(this, props));
+	  }
+
+	  _createClass(Texto, [{
+	    key: 'recortaTexto',
+	    value: function recortaTexto(descripcion) {
+	      if (descripcion === null) {
+	        return 'Lo sentimos, en estos momentos no existe descripcion de la noticia.';
+	      } else {
+	        return descripcion.length > this.props.maxlimit ? descripcion.substring(0, this.props.maxlimit - 3) + '...' : descripcion;
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'p',
+	        null,
+	        this.recortaTexto.call(this, this.props.descripcion)
+	      );
+	    }
+	  }]);
+
+	  return Texto;
+	}(_react.Component);
+
+	Texto.PropTypes = {
+	  descripcion: _react.PropTypes.string,
+	  maxlimit: _react.PropTypes.number
+	};
+	Texto.defaultProps = {
+	  descripcion: 'Lo sentimos, en estos momentos no existe descripcion de la noticia.',
+	  maxlimit: 170
+	};
+	exports.default = Texto;
+
+/***/ },
+/* 462 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _titulo = __webpack_require__(463);
+
+	var _titulo2 = _interopRequireDefault(_titulo);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _titulo2.default;
+
+/***/ },
+/* 463 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Titulo = function (_Component) {
+	  _inherits(Titulo, _Component);
+
+	  function Titulo(props) {
+	    _classCallCheck(this, Titulo);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Titulo).call(this, props));
+	  }
+
+	  _createClass(Titulo, [{
+	    key: 'recortaTexto',
+	    value: function recortaTexto(tituloNoticia) {
+	      if (tituloNoticia === null) {
+	        return 'Cargando titulo...';
+	      } else {
+	        return tituloNoticia.length > this.props.maxlimit ? tituloNoticia.substring(0, this.props.maxlimit - 3) + '...' : tituloNoticia;
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'h3',
+	        null,
+	        this.recortaTexto.call(this, this.props.tituloNoticia)
+	      );
+	    }
+	  }]);
+
+	  return Titulo;
+	}(_react.Component);
+
+	Titulo.PropTypes = {
+	  tituloNoticia: _react.PropTypes.string,
+	  maxlimit: _react.PropTypes.number
+	};
+	Titulo.defaultProps = {
+	  tituloNoticia: 'Cargando titulo...',
+	  maxlimit: 60
+	};
+	exports.default = Titulo;
 
 /***/ }
 /******/ ]);

@@ -26,7 +26,7 @@ class Pagina extends Component {
   }
 
   parser(miDato) {
-    console.log(miDato.data);
+    //console.log(miDato.data);
     let nuevosDatos = []
     let logo = "https://facebook.github.io/react/img/logo.svg"
     var regex = new RegExp('(.*?)\.(jpg)$');
@@ -49,7 +49,6 @@ class Pagina extends Component {
     let noticias = ( this.state.datos.length === 0 ) ? <p>Cargando... </p> :
     this.state.datos.map( (noticia,idx) =>
       <Noticia key={idx} titulo={noticia.titulo} texto={noticia.texto} img={noticia.img} link={noticia.link}/> )
-
     return(
       <div>
         <Menu></Menu>
