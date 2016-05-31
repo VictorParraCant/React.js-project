@@ -1,21 +1,23 @@
 import React, { Component, PropTypes as PT } from 'react'
-import {Col, Clearfix, Thumbnail, Button} from 'react-bootstrap'
 import Texto from '../texto'
 import Titulo from '../titulo'
 
 const Noticia = props => {
 
   return(
-      <Col xs={12} sm={4} md={3}>
-        <Thumbnail src={props.img} alt="Image">
-            <Titulo tituloNoticia={props.titulo}></Titulo>
-            <Texto descripcion={props.texto}></Texto>
-            <p className='autor'>Autor: {props.autor}</p>
-            <p className='comment'>Comentarios: {props.comments}</p>
-            <Button bsStyle="info" href={props.link} target="_blank">Leer más</Button>
-            <Button href={props.comment} target="_blank">Ver comentarios</Button>
-        </Thumbnail>
-      </Col>
+    <div className="flex">
+      <div className='flex-noticia'>
+        <img src={props.img}/>
+        <Titulo tituloNoticia={props.titulo}></Titulo>
+        <Texto descripcion={props.texto}></Texto>
+        <p className='autor'>Autor: {props.autor}</p>
+        <p className='comment'>Comentarios: {props.comments}</p>
+        <div className='button'>
+          <a  className='mas' href={props.link} target="_blank">Leer más</a>
+          <a  className='ver' href={props.comment} target="_blank">Ver comentarios</a>
+        </div>
+      </div>
+    </div>
 )}
 
 Noticia.PropTypes = {

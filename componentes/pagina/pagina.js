@@ -1,5 +1,4 @@
 import React, { Component, PropTypes as PT } from 'react'
-import {Grid, Row, Col, Clearfix} from 'react-bootstrap'
 import Menu from "../menu"
 import Noticia from "../noticia"
 import Request from "axios"
@@ -64,13 +63,9 @@ class Pagina extends Component {
     return(
       <div>
         <Menu></Menu>
-        <Grid>
-          <Row className="show-grid">
-            <div id="Flex">
-              {noticias}
-            </div>
-          </Row>
-        </Grid>
+        <div className="flex-container">
+          {noticias}
+        </div>
       </div>
     )
   }

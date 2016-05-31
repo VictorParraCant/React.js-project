@@ -12,13 +12,13 @@ class Texto extends Component {
   }
 
   static defaultProps = {
-    descripcion: 'Lo sentimos, en estos momentos no existe descripcion de la noticia.',
+    descripcion: 'Lo sentimos, en estos momentos no existe una descripción de la noticia.',
     maxlimit: 170
   }
 
   recortaTexto(descripcion){
     if(descripcion === null) {
-      return 'Lo sentimos, en estos momentos no existe descripcion de la noticia.'
+      return 'Lo sentimos, en estos momentos no existe una descripción de la noticia.'
     } else {
       return (descripcion.length > this.props.maxlimit) ?
         ((descripcion.substring(0,this.props.maxlimit-3)) + '...') : descripcion
