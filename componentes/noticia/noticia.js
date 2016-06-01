@@ -5,8 +5,8 @@ import Titulo from '../titulo'
 const Noticia = props => {
 
   return(
-    <div className="flex">
-      <div className='flex-noticia'>
+    <div className='flex-noticia'>
+      <div className='contenido'>
         <img src={props.img}/>
         <Titulo tituloNoticia={props.titulo}></Titulo>
         <Texto descripcion={props.texto}></Texto>

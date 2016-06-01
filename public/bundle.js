@@ -20231,7 +20231,6 @@
 	      return _react2.default.createElement(
 	        "div",
 	        null,
-	        _react2.default.createElement(_menu2.default, null),
 	        _react2.default.createElement(
 	          "div",
 	          { className: "flex-container" },
@@ -39592,10 +39591,10 @@
 
 	  return _react2.default.createElement(
 	    'div',
-	    { className: 'flex' },
+	    { className: 'flex-noticia' },
 	    _react2.default.createElement(
 	      'div',
-	      { className: 'flex-noticia' },
+	      { className: 'contenido' },
 	      _react2.default.createElement('img', { src: props.img }),
 	      _react2.default.createElement(_titulo2.default, { tituloNoticia: props.titulo }),
 	      _react2.default.createElement(_texto2.default, { descripcion: props.texto }),

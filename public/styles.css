@@ -1,64 +1,60 @@
 #menu {
   margin-bottom: 70px;
 }
-.flex-noticia {
-  display: flex;
-  flex-flow: column wrap;
+.contenido {
   padding: 10px;
   border: solid 1px #ccc;
   border-radius: 5px;
 }
-.flex-noticia img {
+.contenido img {
   width: 100%;
   height: auto;
   border-radius: 5px;
 }
-.flex-noticia .button {
+.contenido .button {
   width: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: space-around;
 }
-.flex-noticia .button a,
-.flex-noticia .button .mas {
+.contenido .button a,
+.contenido .button .mas {
   text-decoration: none;
   color: #fff;
   padding: 5px 10px;
   background-color: #02869e;
   border-radius: 5px;
 }
-.flex-noticia .button .ver {
+.contenido .button .ver {
   color: #333;
   background-color: transparent;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
-.flex-noticia h3 {
+.contenido h3 {
   font-size: 20px;
 }
-.flex-noticia .comment {
+.contenido .comment {
   font-size: 12px;
   text-align: left;
   color: #333;
   font-weight: bold;
 }
-.flex-noticia .autor {
+.contenido .autor {
   font-size: 12px;
   text-align: left;
   color: #02869e;
   font-weight: bold;
 }
 .flex-container {
-  display: flex;
-  flex-flow: column wrap;
-  height: 100vw;
-  width: 100%;
+  column-count: 4;
+  column-gap: 0;
+  -moz-column-count: 4;
+  -moz-column-gap: 0;
 }
-.flex {
-  display: flex;
-  flex: 0 0 auto;
-  width: 23%;
-  margin: 1%;
+.flex-noticia {
+  page-break-inside: avoid;
+  padding: 10px;
   flex-flow: column wrap;
   justify-content: flex-start;
   align-items: flex-start;
