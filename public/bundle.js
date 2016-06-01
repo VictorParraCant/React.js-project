@@ -20231,6 +20231,7 @@
 	      return _react2.default.createElement(
 	        "div",
 	        null,
+	        _react2.default.createElement(_menu2.default, null),
 	        _react2.default.createElement(
 	          "div",
 	          { className: "flex-container" },
@@ -39596,32 +39597,36 @@
 	      'div',
 	      { className: 'contenido' },
 	      _react2.default.createElement('img', { src: props.img }),
-	      _react2.default.createElement(_titulo2.default, { tituloNoticia: props.titulo }),
-	      _react2.default.createElement(_texto2.default, { descripcion: props.texto }),
-	      _react2.default.createElement(
-	        'p',
-	        { className: 'autor' },
-	        'Autor: ',
-	        props.autor
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        { className: 'comment' },
-	        'Comentarios: ',
-	        props.comments
-	      ),
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'button' },
+	        { ClassName: 'info' },
+	        _react2.default.createElement(_titulo2.default, { tituloNoticia: props.titulo }),
+	        _react2.default.createElement(_texto2.default, { descripcion: props.texto }),
 	        _react2.default.createElement(
-	          'a',
-	          { className: 'mas', href: props.link, target: '_blank' },
-	          'Leer más'
+	          'p',
+	          { className: 'autor' },
+	          'Autor: ',
+	          props.autor
 	        ),
 	        _react2.default.createElement(
-	          'a',
-	          { className: 'ver', href: props.comment, target: '_blank' },
-	          'Ver comentarios'
+	          'p',
+	          { className: 'comment' },
+	          'Comentarios: ',
+	          props.comments
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'button' },
+	          _react2.default.createElement(
+	            'a',
+	            { className: 'base mas', href: props.link, target: '_blank' },
+	            'Leer más'
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            { className: 'base ver', href: props.comment, target: '_blank' },
+	            'Ver comentarios'
+	          )
 	        )
 	      )
 	    )

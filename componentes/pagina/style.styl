@@ -4,10 +4,19 @@
   // Firefox
   -moz-column-count: 4
   -moz-column-gap: 0
+  @media (max-width: 992px)
+    column-count: 3
+    -moz-column-count: 3
+  @media (max-width: 768px)
+    column-count: 2
+    -moz-column-count: 2
+  @media (max-width: 480px)
+    column-count: 1
+    -moz-column-count: 1
+  background-color: #f3f3f3
 
 .flex-noticia
   page-break-inside: avoid
-
   padding: 10px
   flex-flow: column wrap
   justify-content: flex-start

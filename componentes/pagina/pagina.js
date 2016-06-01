@@ -62,6 +62,7 @@ class Pagina extends Component {
 
     return(
       <div>
+        <Menu></Menu>
         <div className="flex-container">
           {noticias}
         </div>

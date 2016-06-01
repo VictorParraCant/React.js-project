@@ -8,13 +8,15 @@ const Noticia = props => {
     <div className='flex-noticia'>
       <div className='contenido'>
         <img src={props.img}/>
-        <Titulo tituloNoticia={props.titulo}></Titulo>
-        <Texto descripcion={props.texto}></Texto>
-        <p className='autor'>Autor: {props.autor}</p>
-        <p className='comment'>Comentarios: {props.comments}</p>
-        <div className='button'>
-          <a  className='mas' href={props.link} target="_blank">Leer más</a>
-          <a  className='ver' href={props.comment} target="_blank">Ver comentarios</a>
+        <div ClassName='info'>
+          <Titulo tituloNoticia={props.titulo}></Titulo>
+          <Texto descripcion={props.texto}></Texto>
+          <p className='autor'>Autor: {props.autor}</p>
+          <p className='comment'>Comentarios: {props.comments}</p>
+          <div className='button'>
+            <a className='base mas' href={props.link} target="_blank">Leer más</a>
+            <a className='base ver' href={props.comment} target="_blank">Ver comentarios</a>
+          </div>
         </div>
       </div>
     </div>
