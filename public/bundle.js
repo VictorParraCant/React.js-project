@@ -58,9 +58,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var url = "https://www.reddit.com/r/reactjs.json";
-
-	(0, _reactDom.render)(_react2.default.createElement(_pagina2.default, { dir: url }), document.getElementById('container'));
+	(0, _reactDom.render)(_react2.default.createElement(_pagina2.default, null), document.getElementById('container'));
 
 /***/ },
 /* 1 */
@@ -20173,7 +20171,8 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Pagina).call(this));
 
 	    _this.state = {
-	      datos: []
+	      datos: [],
+	      loading: true
 	    };
 	    return _this;
 	  }
@@ -20181,16 +20180,25 @@
 	  _createClass(Pagina, [{
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
+	      this.pedirDatos(this.props.url);
+	    }
+	  }, {
+	    key: "pedirDatos",
+	    value: function pedirDatos(nuevaUrl) {
 	      var _this2 = this;
 
-	      _axios2.default.get(this.props.dir).then(function (response) {
+	      this.setState({ loading: true });
+	      _axios2.default.get(nuevaUrl).then(function (response) {
 	        return _this2.parser.call(_this2, response);
 	      });
 	    }
 	  }, {
 	    key: "parser",
 	    value: function parser(miDato) {
-	      console.log(miDato.data);
+	      this.setState({
+	        loading: false
+	      });
+	      //console.log(miDato.data);
 	      var nuevosDatos = [];
 	      var logo = "https://facebook.github.io/react/img/logo.svg";
 	      var regex = new RegExp('(.*?)\.(jpg)$');
@@ -20213,10 +20221,12 @@
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      var noticias = this.state.datos.length === 0 ? _react2.default.createElement(
+	      var _this3 = this;
+
+	      var noticias = this.state.datos.length === 0 || this.state.loading === true ? _react2.default.createElement(
 	        "p",
 	        null,
-	        "Cargando... "
+	        "Cargando ..."
 	      ) : this.state.datos.map(function (noticia, idx) {
 	        return _react2.default.createElement(_noticia2.default, { key: idx,
 	          img: noticia.img,
@@ -20231,7 +20241,9 @@
 	      return _react2.default.createElement(
 	        "div",
 	        null,
-	        _react2.default.createElement(_menu2.default, null),
+	        _react2.default.createElement(_menu2.default, { handleClick: function handleClick(x) {
+	            _this3.pedirDatos.call(_this3, x);
+	          } }),
 	        _react2.default.createElement(
 	          "div",
 	          { className: "flex-container" },
@@ -20245,10 +20257,10 @@
 	}(_react.Component);
 
 	Pagina.PropTypes = {
-	  dir: _react.PropTypes.string
+	  url: _react.PropTypes.string
 	};
 	Pagina.defaultProps = {
-	  dir: "https://www.reddit.com/r/reactjs.json"
+	  url: "https://www.reddit.com/r/reactjs.json"
 	};
 	exports.default = Pagina;
 
@@ -20310,6 +20322,12 @@
 	  }
 
 	  _createClass(Menu, [{
+	    key: 'detectarClick',
+	    value: function detectarClick(e) {
+	      e.preventDefault();
+	      this.props.handleClick(e.target.href);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -20330,6 +20348,20 @@
 	                'React-News'
 	              )
 	            )
+	          ),
+	          _react2.default.createElement(
+	            _reactBootstrap.Nav,
+	            null,
+	            _react2.default.createElement(
+	              _reactBootstrap.NavItem,
+	              { eventKey: 1, href: 'https://www.reddit.com/r/reactjs.json', onClick: this.detectarClick.bind(this) },
+	              'REACT'
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.NavItem,
+	              { eventKey: 2, href: 'https://www.reddit.com/r/gifs.json', onClick: this.detectarClick.bind(this) },
+	              'GIFS'
+	            )
 	          )
 	        )
 	      );
@@ -20339,6 +20371,12 @@
 	  return Menu;
 	}(_react.Component);
 
+	Menu.PropTypes = {
+	  handleClick: _react.PropTypes.functions
+	};
+	Menu.defaultProps = {
+	  handleClick: function handleClick() {}
+	};
 	exports.default = Menu;
 
 /***/ },
@@ -39605,7 +39643,7 @@
 	        _react2.default.createElement(
 	          'p',
 	          { className: 'autor' },
-	          'Autor: ',
+	          'Compartido por: ',
 	          props.autor
 	        ),
 	        _react2.default.createElement(

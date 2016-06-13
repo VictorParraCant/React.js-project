@@ -6,26 +6,36 @@ import Request from "axios"
 class Pagina extends Component {
 
   static PropTypes = {
-    dir: PT.string,
+    url: PT.string
   }
+
   static defaultProps = {
-    dir: "https://www.reddit.com/r/reactjs.json",
+    url: "https://www.reddit.com/r/reactjs.json"
   }
 
   constructor() {
     super();
     this.state = {
-      datos: []
+      datos: [],
+      loading: true
     }
   }
 
   componentDidMount() {
-    Request.get(this.props.dir)
+    this.pedirDatos(this.props.url)
+  }
+
+  pedirDatos(nuevaUrl) {
+    this.setState({ loading: true })
+    Request.get(nuevaUrl)
       .then( response => ::this.parser(response) )
   }
 
   parser(miDato) {
-    console.log(miDato.data);
+    this.setState({
+      loading: false
+    });
+    //console.log(miDato.data);
     let nuevosDatos = []
     let logo = "https://facebook.github.io/react/img/logo.svg"
     var regex = new RegExp('(.*?)\.(jpg)$');
@@ -49,7 +59,7 @@ class Pagina extends Component {
   }
 
   render(){
-    let noticias = ( this.state.datos.length === 0 ) ? <p>Cargando... </p> :
+    let noticias = ( this.state.datos.length === 0 || this.state.loading === true) ?  <p>Cargando ...</p> :
     this.state.datos.map( (noticia,idx) =>
       <Noticia key={idx}
         img={noticia.img}
@@ -62,7 +72,7 @@ class Pagina extends Component {
 
     return(
       <div>
-        <Menu></Menu>
+        <Menu handleClick={ (x) => { ::this.pedirDatos(x) } } ></Menu>
         <div className="flex-container">
           {noticias}
         </div>

@@ -11,7 +11,7 @@ const Noticia = props => {
         <div ClassName='info'>
           <Titulo tituloNoticia={props.titulo}></Titulo>
           <Texto descripcion={props.texto}></Texto>
-          <p className='autor'>Autor: {props.autor}</p>
+          <p className='autor'>Compartido por: {props.autor}</p>
           <p className='comment'>Comentarios: {props.comments}</p>
           <div className='button'>
             <a className='base mas' href={props.link} target="_blank">Leer más</a>
